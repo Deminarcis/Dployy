@@ -1,4 +1,4 @@
-## Commandant
+## Dployy
 ---
 Tested with:
 - Windows 11 25H2 Pro and WSL2
@@ -8,8 +8,6 @@ Tested with:
 You need Powershell 7+ to run this.
 
 #### Notes:
-
-This is my first powershell project, please open an issue if something doesn't work, and I'll accomodate as best I can.
 
 Thank you to [Hayden Barnes](https://boxofcables.dev) for the guide on custom WSL kernels, allowing QEMU to be used in a container
 No modification is made to the WSL2 Kernel included that is not described in the guide included. My build script can be found in [this repo](https://github.com/Deminarcis/WSL2-Kernel-KVM), the build included in this repo will be whatever is newest from Microsoft's sources based on the update of the other repo.
