@@ -10,7 +10,7 @@ function show_tui
     Write-Host ""
     Write-Host ""
     Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
-    Write-Color "| ", "WELCOME TO COMMANDANT", "                                      |  " -color Magenta, Red, Magenta
+    Write-Color "| ", "WELCOME TO DPLOYY", "                                      |  " -color Magenta, Red, Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
     Write-Color "| ", "SYSTEM TWEAKS AND TOOLS:", "                                   |  " -color Magenta, White, Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
@@ -111,7 +111,7 @@ function show_linux_tui
     Write-Host ""
     Write-Host ""
     Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
-    Write-Color "| ", "  WELCOME TO COMMANDANT", "                                    |  " -color Magenta, Red, Magenta
+    Write-Color "| ", "  WELCOME TO DPLOYY", "                                    |  " -color Magenta, Red, Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
     Write-Color "| ", "SYSTEM TWEAKS AND TOOLS: ", "                                  |  " -color Magenta, White, Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
@@ -191,7 +191,7 @@ function show_mac_tui
     Write-Host ""
     Write-Host ""
     Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
-    Write-Color "| ", "WELCOME TO COMMANDANT", "                                      | " -color Magenta, Red, Magenta
+    Write-Color "| ", "WELCOME TO DPLOYY", "                                      | " -color Magenta, Red, Magenta
     Write-Color "|────────────────────────────────────────────────────────────│" -color Magenta
     Write-Color "| ", "SYSTEM SETUP AND TWEAKS: ", "                                  | " -color Magenta, White, Magenta
     Write-Color "|────────────────────────────────────────────────────────────│" -color Magenta
