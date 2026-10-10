@@ -1,4 +1,4 @@
-pwshfunction containers_linux {
+function containers_linux {
     Write-Host ""
     Write-Host ""
     Write-Color "╭────────────────────────────────────────────────────────────╮  " -color Magenta
