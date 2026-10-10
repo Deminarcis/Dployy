@@ -2,7 +2,7 @@ function containers_windows {
     Clear-Host
     Write-Host ""
     Write-Host ""
-    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
+    Write-Color "╭────────────────────────────────────────────────────────────╮  " -color Magenta
     Write-Color "| ", "WSL DISTRO INSTALLER ", "                                      | " -color Magenta, White, Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
     Write-Color "|                                                            |  " -color Magenta
@@ -16,38 +16,28 @@ function containers_windows {
     Write-Color "|                                                            |  " -color Magenta
     Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
     Write-Color "| ", " q to Quit ", "                                                |  " -color Magenta, White, Magenta
-    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
+    Write-Color "╰────────────────────────────────────────────────────────────╯  " -color Magenta
     Write-Host ""
     Write-Host ""
-
-    do {
-        $choice = Read-Host "Enter your choice or press 'o' to reload the options"
-        if ($choice -eq 'q' -or $choice -eq 'quit') {
-            break
-        }
-        switch ($choice) {
-            '1' {
-                Start-Process pwsh "-File", "container_ubuntu.ps1"
-            }
-            '2' {
-                Start-Process pwsh "-File", "container_fedora.ps1"
-            }
-            '3' {
-                Start-Process pwsh "-File", "container_kali.ps1"
-            }
-            '4' {
-                Start-Process pwsh "-File", "container_arch.ps1"
-            }
-            '5' {
-                Start-Process pwsh "-File", "container_leap.ps1"
-            }
-            'b' {
-                exit
-            }
-            'o' {
-                containers_windows
-            }
-        }
-    } while ($true)
 }
-containers_windows
+
+do {
+    $choice = Read-Host "Enter your choice or press 'q' to quit"
+    switch ($choice) {
+        '1' {
+             pwsh -File container_ubuntu.ps1
+        }
+        '2' {
+             pwsh -File container_fedora.ps1
+        }
+        '3' {
+             pwsh -File container_kali.ps1
+        }
+        '4' {
+             pwsh -File container_arch.ps1
+        }
+        '5' {
+             pwsh -File container_leap.ps1
+        }
+    }
+} until ($choice -eq 'q')
