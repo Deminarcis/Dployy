@@ -12,9 +12,9 @@ function install_apps_mac {
     Write-Color "| ", "16. Helium             17. Zen             18. Discord ", "                  |  " -color Magenta, White, Magenta
     Write-Color "| ", "19. Thunderbird        20. xquartz         21. Superfile ", "                |  " -color Magenta, White, Magenta
     Write-Color "| ", "22. Ghidra             23. Intellidock     24. Grid (requires Licence) ", "  |  " -color Magenta, White, Magenta
-    Write-Color "| ", "25. Jetbrains Toolbox  26. Bitwarden       27. LMStudio ", "                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "28. Helix              29. lsd             30. Bat ", "                      |  " -color Magenta, White, Magenta
-    Write-Color "| ", "31. Powershell         32. Mesa 3D         33. Vulkan Tools ", "             |  " -color Magenta, White, Magenta
+    Write-Color "| ", "25. Jetbrains Toolbox  26. Proton Pass     27. LMStudio ", "                 |  " -color Magenta, White, Magenta
+    Write-Color "| ", "28. Fresh              29. lsd             30. Bat ", "                      |  " -color Magenta, White, Magenta
+    Write-Color "| ", "31. Mesa 3D            32. Vulkan Tools ", "                                 |  " -color Magenta, White, Magenta
     Write-Color "|                                                                          |  " -color Magenta
     Write-Color "|                                                                          |  " -color Magenta
     Write-Color "|──────────────────────────────────────────────────────────────────────────|  " -color Magenta
@@ -123,7 +123,7 @@ do {
             brew install --cask lm-studio
         }
         28 {
-            brew install helix
+            brew install fresh-editor
         }
         29 {
             brew install lsd
@@ -132,21 +132,18 @@ do {
             brew install bat
         }
         31 {
-            brew install powershell
-        }
-        32 {
             brew install mesa
         }
-        33 {
+        32 {
             brew install vulkan-tools
         }
-        'c' {
+        "c" {
             cask_choice
         }
-        'p' {
+        "p" {
             port_choice
         }
-        'b' {
+        "b" {
             brew_choice
         }
     }

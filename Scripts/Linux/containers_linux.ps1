@@ -43,10 +43,6 @@ do {
         7 {
             pwsh -File container_leap.ps1
         }
-        default {
-            Write-Host "Invalid choice. Please select from the list above."
-            continue
-            }
-        }
     }
-    until ($choice -eq 'q')
+}
+until ($choice -eq 'q')
