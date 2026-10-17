@@ -1,48 +1,35 @@
-function containers_mac {
-    Write-Host ""
-    Write-Host ""
-    Write-Color "╭────────────────────────────────────────────────────────────╮  " -color Magenta
-    Write-Color "| ", "RECIPES ", "                                                   |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "1. Ubuntu ", "                                                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "2. Fedora ", "                                                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "3. CentOS ", "                                                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "4. Red Hat ", "                                                |  " -color Magenta, White, Magenta
-    Write-Color "| ", "5. Kali ", "                                                   |  " -color Magenta, White, Magenta
-    Write-Color "| ", "6. Blackarch ", "                                              |  " -color Magenta, White, Magenta
-    Write-Color "| ", "7. OpenSUSE ", "                                               |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "╰────────────────────────────────────────────────────────────╯  " -color Magenta
-    Write-Host ""
-    Write-Host ""
+if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
+    if ( ($IsMacOS -eq $true) -or ($IsLinux -eq $true) ) {
+        Import-Module ../../bin/DynamicMenu.psm1
+    }
+    else {
+        import-module ..\..\bin\DynamicMenu.psm1
+    }
 }
 
-do {
-    containers_mac
-    $choice = Read-Host "Enter your choice from the list above or press 'q' to go back: "
+$Menu = [Menu]::New('CONTAINER RECIPES')
 
-    switch ($choice) {
-        1 {
-            pwsh -ArgumentList -File container_ubuntu.ps1
-        }
-        2 {
-            pwsh -ArgumentList -File container_fedora.ps1
-        }
-        3 {
-            pwsh -ArgumentList -File container_centos.ps1
-        }
-        4 {
-            pwsh -ArgumentList -File container_rhel.ps1
-        }
-        5 {
-            pwsh -ArgumentList -File container_kali.ps1
-        }
-        6 {
-            pwsh -ArgumentList -File container_blackarch.ps1
-        }
-        7 {
-            pwsh -ArgumentList -File container_leap.ps1
-        }
+$Container = [MenuSection]::New(1, 'CONTAINER RECIPES')
+$Container.AddOption('1', 'Ubuntu', './container_ubuntu.ps1')
+$Container.AddOption('2', 'Fedora', './container_fedora.ps1')
+$Container.AddOption('3', 'CentOS', './container_centos.ps1')
+$Container.AddOption('4', 'Red Hat Enterprise Linux (UBI) ', './container_rhel.ps1')
+$Container.AddOption('5', 'Kali Linux', './container_kali.ps1')
+$Container.AddOption('6', 'Blackarch', './container_blackarch.ps1')
+$Container.AddOption('7', 'OpenSUSE Leap', './container_leap.ps1')
+$Container.AddOption('Q', 'Quit', 'q')
+$Menu.AddSection($Container)
+
+While ($True) {
+    Clear-Host
+    $Menu.Draw()
+    $Selection = $Menu.ReadResponse("Pick an option from the list above or press 'q' to quit", 'Callback')
+    If ($Selection -eq 'q') {
+        Break
     }
-} until ($choice -eq 'q')
-
+    Else {
+        "Executing Script: $($Selection)"
+        #Can even make them a module and have them run the code automatically in import
+        #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+    }
+}

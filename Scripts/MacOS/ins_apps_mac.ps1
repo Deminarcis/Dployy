@@ -1,150 +1,56 @@
-function install_apps_mac {
-    Write-Host ""
-    Write-Host ""
-    Write-Color "╭──────────────────────────────────────────────────────────────────────────╮  " -color Magenta
-    Write-Color "| ", "APP INSTALLER", "                                                            |  " -color Magenta
-    Write-Color "|──────────────────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "1. Ghostty             2. iTerm2           3. Kitty ", "                     |  " -color Magenta, White, Magenta
-    Write-Color "| ", "4. Alacritty           5. Zellij           6. VSCode ", "                    |  " -color Magenta, White, Magenta
-    Write-Color "| ", "7. Zed                 8. Podman Desktop   9. Crossover ", "                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "10. UTM                11. Handbrake       12. Mole ", "                     |  " -color Magenta, White, Magenta
-    Write-Color "| ", "13. Veracrypt          14. Orion           15. Google Chrome ", "            | " -color Magenta, White, Magenta
-    Write-Color "| ", "16. Helium             17. Zen             18. Discord ", "                  |  " -color Magenta, White, Magenta
-    Write-Color "| ", "19. Thunderbird        20. xquartz         21. Superfile ", "                |  " -color Magenta, White, Magenta
-    Write-Color "| ", "22. Ghidra             23. Intellidock     24. Grid (requires Licence) ", "  |  " -color Magenta, White, Magenta
-    Write-Color "| ", "25. Jetbrains Toolbox  26. Proton Pass     27. LMStudio ", "                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "28. Fresh              29. lsd             30. Bat ", "                      |  " -color Magenta, White, Magenta
-    Write-Color "| ", "31. Mesa 3D            32. Vulkan Tools ", "                                 |  " -color Magenta, White, Magenta
-    Write-Color "|                                                                          |  " -color Magenta
-    Write-Color "|                                                                          |  " -color Magenta
-    Write-Color "|──────────────────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "|   b to install fomulaue not on this list                                 |  " -color Magenta, White, Magenta
-    Write-Color "|   c to install cask not on this list                                     |  " -color Magenta, White, Magenta
-    Write-Color "|   p to install port not on this list                                     |  " -color Magenta, White, Magenta
-    Write-Color "╰──────────────────────────────────────────────────────────────────────────╯  " -color Magenta
-    Write-Host ""
-    Write-Host ""
-}
-function cask_choice {
-    $cask = Read-Host "Enter the name of the brew cask you want to install"
-}
-function port_choice {
-    $port = Read-Host "Enter the name of the port you want to install"
-}
-
-function brew_choice {
-    $brew = Read-Host "Enter the name of the brew formula you want to install"
-}
-
-do {
-    install_apps_mac
-    $choice = Read-Host "Pick a number to continue or press 'q' to quit"
-
-    switch ($choice) {
-        1 {
-            brew install ghostty
-        }
-        2 {
-            brew install iterm2
-        }
-        3 {
-            brew install kitty
-        }
-        4 {
-            brew install alacritty
-        }
-        5 {
-            brew install zellij
-        }
-        6 {
-            brew install visual-studio-code
-        }
-        7 {
-            brew install zed
-        }
-        8 {
-            brew install podman-desktop
-        }
-        9 {
-            brew install crossover
-        }
-        10 {
-            brew install utm
-        }
-        11 {
-            brew install handbrake
-        }
-        12 {
-            brew install mole
-        }
-        13 {
-            brew install veracrypt
-        }
-        14 {
-            brew install orion
-        }
-        15 {
-            brew install google-chrome
-        }
-        16 {
-            brew install --cask helium-browser
-        }
-        17 {
-            brew install zen
-        }
-        18 {
-            brew install discord
-        }
-        19 {
-            brew install thunderbird
-        }
-        20 {
-            brew install xquartz
-        }
-        21 {
-            brew install superfile
-        }
-        22 {
-            brew install ghidra
-        }
-        23 {
-            brew install intellidock
-        }
-        24 {
-            brew install grid
-        }
-        25 {
-            brew install jetbrains-toolbox
-        }
-        26 {
-            brew install bitwarden
-        }
-        27 {
-            brew install --cask lm-studio
-        }
-        28 {
-            brew install fresh-editor
-        }
-        29 {
-            brew install lsd
-        }
-        30 {
-            brew install bat
-        }
-        31 {
-            brew install mesa
-        }
-        32 {
-            brew install vulkan-tools
-        }
-        "c" {
-            cask_choice
-        }
-        "p" {
-            port_choice
-        }
-        "b" {
-            brew_choice
-        }
+if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
+    if ( ($IsMacOS -eq $true) -or ($IsLinux -eq $true) ) {
+        Import-Module ../../bin/DynamicMenu.psm1
     }
-} until ($choice -eq 'q')
+    else {
+        import-module ..\..\bin\DynamicMenu.psm1
+    }
+}
+
+$Menu = [Menu]::New('APP INSTALLER')
+
+$Apps = [MenuSection]::New(1, 'AVAILABLE APPLICATIONS')
+$Apps.AddOption('1', 'Ghostty', 'brew install ghostty')
+$Apps.AddOption('2', 'iTerm2', 'brew install iterm2')
+$Apps.AddOption('3', 'Kitty', 'brew install kitty')
+$Apps.AddOption('4', 'Alacritty', 'brew install alacritty')
+$Apps.AddOption('5', 'Zellij', 'brew install zellij')
+$Apps.AddOption('6', 'VSCode', 'brew install visual-studio-code')
+$Apps.AddOption('7', 'Zed', 'brew install zed')
+$Apps.AddOption('8', 'Podman Desktop', 'brew install podman-desktop')
+$Apps.AddOption('9', 'Crossover', 'brew install crossover')
+$Apps.AddOption('10', 'UTM', 'brew install --cask utm')
+$Apps.AddOption('11', 'Handbrake', 'brew install handbrake')
+$Apps.AddOption('12', 'Mole', 'brew install mole')
+$Apps.AddOption('13', 'Veracrypt', 'brew install veracrypt')
+$Apps.AddOption('14', 'Google Chrome', 'brew install google-chrome')
+$Apps.AddOption('15', 'Proton Pass', 'brew install proton-pass')
+$Apps.AddOption('16', 'Vivaldi', 'brew install vivaldi')
+$Apps.AddOption('17', 'Discord', 'brew install --cask discord')
+$Apps.AddOption('18', 'Xquartz', 'brew install xquartz')
+$Apps.AddOption('19', 'Superfile', 'brew install extras/bleachbit')
+$Apps.AddOption('20', 'Ghidra', 'brew install extras/discord')
+$Apps.AddOption('21', 'DockAutoHide', 'brew tap nshcr/tap && brew trust nshcr/tap && brew install --cask dockautohide')
+$Apps.AddOption('22', 'Rectangle', 'brew install rectangle')
+$Apps.AddOption('23', 'YT-Dlp', 'brew install yt-dlp')
+$Apps.AddOption('24', 'LM Stuido', 'brew install lm-studio')
+$Apps.AddOption('25', 'Fresh Editor', 'brew install fresh')
+$Apps.AddOption('26', 'lsd', 'brew install lsd')
+$Apps.AddOption('27', 'Vulkan Tools', 'brew install vulkan-tools')
+$Apps.AddOption('28', 'Mesa 3D', 'brew install mesa')
+$Apps.AddOption('Q', 'Quit', 'q')
+$Menu.AddSection($Apps)
+
+While ($True) {
+    Clear-Host
+    $Menu.Draw()
+    $Selection = $Menu.ReadResponse("Pick an option from the list above or press 'q' to quit", 'Callback')
+    If ($Selection -eq 'q') {
+        Break
+    }
+    Else {
+        "Executing Script: $($Selection)"
+        #Can even make them a module and have them run the code automatically in import
+        #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+    }
+}

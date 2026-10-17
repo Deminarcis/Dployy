@@ -55,7 +55,7 @@ elseif ($isLinux -eq $true)
     #Add Options to the Section
     $Tweaks.AddOption('1', 'Install Flathub', '../Scripts/Linux/ins_flathub.ps1')
     $Tweaks.AddOption('2', 'Install Pods', '../Scripts/Linux/ins_pods.ps1')
-    $Tweaks.AddOption('3', 'Install Homebrew', '../Scripts/Linux/ins_flathub.ps1')
+    $Tweaks.AddOption('3', 'Install Homebrew', 'bash -c ../Scripts/Linux/ins_brew.sh')
     $Tweaks.AddOption('4', 'Install Nix', '../Scripts/Linux/ins_flathub.ps1')
     $Tweaks.AddOption('Z', 'Custome Zsh Prompt', '../Scripts/Linux/zsh_prompt.ps1')
     $Tweaks.AddOption('P', 'Custom Powershell Prompt', '../Scripts/Linux/ps_prompt.ps1')
