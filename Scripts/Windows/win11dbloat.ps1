@@ -1,0 +1,1 @@
+pwsh -Command "& ([scriptblock]::Create((irm 'https://debloat.raphi.re/')))"

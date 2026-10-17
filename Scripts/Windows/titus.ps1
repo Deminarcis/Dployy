@@ -1,0 +1,1 @@
+Start-Process Powershell -Verb RunAs -ArgumentList "irm https://christitus.com/win | iex" -Wait

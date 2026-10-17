@@ -1,108 +1,52 @@
-function install_apps {
-    Clear-Host
-    Write-Host ""
-    Write-Host ""
-    Write-Color "┌────────────────────────────────────────────────────────────┐  " -color Magenta
-    Write-Color "| ", "APP INSTALLER:", "                                             |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "1. Powershell      2. VSCode      3. Powertoys ", "            |  " -color Magenta, White, Magenta
-    Write-Color "| ", "4. Zen Browser     5. Google Chrome   6. Firefox Browser ", "  |  " -color Magenta, White, Magenta
-    Write-Color "| ", "7. Mozilla Thunderbird   8. bat       9. Nano      ", "        |  " -color Magenta, White, Magenta
-    Write-Color "| ", "10. MS Edit       11. lsd      12. Helix  ", "                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "13. sysinternals  14. 7zip     15. Bitwarden  ", "             |  " -color Magenta, White, Magenta
-    Write-Color "| ", "16. Haruna        17. WinFsp     18. Zed  ", "                 |  " -color Magenta, White, Magenta
-    Write-Color "| ", "19. Bleachbit     20. Discord     21. Obsidian ", "            |  " -color Magenta, White, Magenta
-    Write-Color "| ", "22 Mesa 3D       23. YT-Dlp     24. ffmpeg ", "                |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "s to search for package                 ", "                   |  " -color Magenta, White, Magenta
-    Write-Color "| ", "i to install unlisted app               ", "                   |  " -color Magenta, White, Magenta
-    Write-Color "└────────────────────────────────────────────────────────────┘  " -color Magenta
-    Write-Host ""
-    Write-Host ""
+if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
+    if ( ($IsMacOS -eq $true) -or ($IsLinux -eq $true) ) {
+        Import-Module ../../bin/DynamicMenu.psm1
+    }
+    else {
+        import-module ..\..\bin\DynamicMenu.psm1
+    }
 }
 
-do {
-    install_apps
-    $choice = Read-Host "Pick a number to continue or press 'q' to go back"
+$Menu = [Menu]::New('APP INSTALLER')
 
-    switch ($choice) {
-        1 {
-            scoop install pwsh && install_apps
-        }
-        2 {
-            scoop install vscode && install_apps
-        }
-        3 {
-            scoop install extras/powertoys && install_apps
-        }
-        4 {
-            scoop install extras/zen-browser && install_apps
-        }
-        5 {
-            scoop install extras/googlechrome && install_apps
-        }
-        6 {
-            scoop install extras/firefox && install_apps
-        }
-        7 {
-            scoop install extras/thunderbird && install_apps
-        }
-        8 {
-            scoop install bat && install_apps
-        }
-        9 {
-            scoop install nano && install_apps
-        }
-        10 {
-            scoop install edit && install_apps
-        }
-        11 {
-            scoop install lsd && install_apps
-        }
-        12 {
-            scoop install helix && install_apps
-        }
-        13 {
-            scoop install extras/sysinternals && install_apps
-        }
-        14 {
-            scoop install 7zip && install_apps
-        }
-        15 {
-            scoop install extras/bitwarden && install_apps
-        }
-        16 {
-            winget install --id=KDE.Haruna -e && install_apps
-        }
-        17 {
-            scoop install nonportable/winfsp-np && install_apps
-        }
-        18 {
-            scoop install extras/zed && install_apps
-        }
-        19 {
-            scoop install extras/bleachbit && install_apps
-        }
-        20 {
-            scoop install extras/discord && install_apps
-        }
-        21 {
-            scoop install extras/obsidian && install_apps
-        }
-        22 {
-            scoop install games/mesa3d && install_apps
-        }
-        23 {
-            scoop install yt-dlp ffmpeg
-        }
-        24 {
-            scoop install ffmpeg
-        }
-        'i' {
-            $unlisted_app = Read-Host "Enter the name of the app to install"; scoop install $unlisted_app
-        }
-        's' {
-            $search_app = Read-Host "Enter the name of the package you are looking for: "; scoop search $search_app
-        }
+$Apps = [MenuSection]::New(1, 'AVAILABLE APPLICATIONS')
+$Apps.AddOption('1', 'Powershell', 'scoop install pwsh')
+$Apps.AddOption('2', 'VSCode', 'scoop install vscode')
+$Apps.AddOption('3', 'Powertoys', 'scoop install extras/powertoys')
+$Apps.AddOption('4', 'Zen Browser', 'scoop install extras/zen-browser')
+$Apps.AddOption('5', 'Google Chrome', 'scoop install extras/googlechrome')
+$Apps.AddOption('6', 'Firefox Browser', 'scoop install extras/firefox')
+$Apps.AddOption('7', 'Mozilla Thunderbird', 'scoop install extras/thunderbird')
+$Apps.AddOption('8', 'bat', 'scoop install bat')
+$Apps.AddOption('9', 'Nano', 'scoop install nano')
+$Apps.AddOption('10', 'MS Edit', 'scoop install edit')
+$Apps.AddOption('11', 'lsd', 'scoop install lsd')
+$Apps.AddOption('12', 'Fresh Editor', 'scoop install fresh')
+$Apps.AddOption('13', 'sysinternals', 'scoop install extras/sysinternals')
+$Apps.AddOption('14', '7zip', 'scoop install 7zip')
+$Apps.AddOption('15', 'Proton Pass', 'scoop install extras/proton-pass')
+$Apps.AddOption('16', 'Haruna', 'scoop install extras/haruna')
+$Apps.AddOption('17', 'Winfsp', 'scoop install nonportable/winfsp-np')
+$Apps.AddOption('18', 'Zed', 'scoop install extras/zed')
+$Apps.AddOption('19', 'Bleachbit', 'scoop install extras/bleachbit')
+$Apps.AddOption('20', 'Discord', 'scoop install extras/discord')
+$Apps.AddOption('21', 'Obsidian', 'scoop install extras/obsidian')
+$Apps.AddOption('22', 'Mesa 3D', 'scoop install games/mesa3d')
+$Apps.AddOption('23', 'YT-Dlp', 'scoop install yt-dlp ffmpeg')
+$Apps.AddOption('24', 'handbrake', 'scoop install extras/handbrake')
+$Apps.AddOption('Q', 'Quit', 'q')
+$Menu.AddSection($Apps)
+
+While ($True) {
+    Clear-Host
+    $Menu.Draw()
+    $Selection = $Menu.ReadResponse("Pick an option from the list above or press 'q' to quit", 'Callback')
+    If ($Selection -eq 'q') {
+        Break
     }
-} until ($choice -eq 'q')
+    Else {
+        "Executing Script: $($Selection)"
+        #Can even make them a module and have them run the code automatically in import
+        #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+    }
+}

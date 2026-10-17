@@ -1,230 +1,128 @@
-if (-not (Get-Module -ListAvailable -Name "PSWriteColor"))
-{
-    Install-Module -Name "PSWriteColor" -Scope CurrentUser -Force -SkipPublisherCheck
-}
-Import-Module -Name PSWriteColor
-
-function windows_menu
-{
-    Clear-Host
-    Write-Host ""
-    Write-Host ""
-    Write-Color "╭────────────────────────────────────────────────────────────╮  " -color Magenta
-    Write-Color "| ", "WELCOME TO DPLOYY", "                                      |  " -color Magenta, Red, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "SYSTEM TWEAKS AND TOOLS:", "                                   |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "| ", "1. Install WSL2", "                                            |  " -color Magenta, White, Magenta
-    Write-Color "| ", "2. Install Apps", "                                            |  " -color Magenta, White, Magenta
-    Write-Color "| ", "3. Install Custom WSL Kernel", "                               |  " -color Magenta, White, Magenta
-    Write-Color "| ", "4. Install Custom Powershell Prompt", "                        |  " -color Magenta, White, Magenta
-    Write-Color "| ", "5. Install Scoop", "                                           |  " -color Magenta, White, Magenta
-    Write-Color "| ", "U. Update Installed Apps", "                                   |  " -color Magenta, White, Magenta
-    Write-Color "| ", "G. Enable God Mode", "                                         |  " -color Magenta, White, Magenta
-    Write-Color "| ", "H. Install Hyper-V", "                                         |  " -color Magenta, White, Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "WSL CONTAINERS", "                                             |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "|                                                            |  " -Color Magenta
-    Write-Color "| ", "6.  Install WSL2 containers", "                                |  " -color Magenta, White, Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "DEBLOAT TOOLS", "                                              |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "| ",  "C. Chris Titus' Tools ", "                                     |  " -color Magenta, White, Magenta
-    Write-Color "| ",  "W. Windows11 Debloat  ", "                                     |  " -color Magenta, White, Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ",  "q to Quit ", "                                                 |  " -color Magenta, White, Magenta
-    Write-Color "╰────────────────────────────────────────────────────────────╯  " -color Magenta
-    Write-Host ""
-    Write-Host ""
+if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
+    if ( ($IsMacOS -eq $true) -or ($IsLinux -eq $true) ) {
+        Import-Module ./DynamicMenu.psm1
+    }
+    else {
+        import-module .\DynamicMenu.psm1
+    }
 }
 
-function linux_menu
-{
-    Clear-Host
-    Write-Host ""
-    Write-Host ""
-    Write-Color "╭────────────────────────────────────────────────────────────╮  " -color Magenta
-    Write-Color "| ", "  WELCOME TO DPLOYY", "                                        |  " -color Magenta, Red, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "SYSTEM TWEAKS AND TOOLS: ", "                                  |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "| ", "1. Install Flathub ", "                                        |  " -color Magenta, White, Magenta
-    Write-Color "| ", "2. Install Pods ", "                                           |  " -color Magenta, White, Magenta
-    Write-Color "| ", "3. Install Homebrew ", "                                       |  " -color Magenta, White, Magenta
-    Write-Color "| ", "4. Install Nix package manager  (single user mode)", "         |  " -color Magenta, White, Magenta
-    Write-Color "| ", "5. Set up custom zsh profile ", "                              |  " -color Magenta, White, Magenta
-    Write-Color "| ", "6. Set up custom powershell profile ", "                       |  " -color Magenta, White, Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "CONTAINERS ", "                                                |  " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "| ", "7. Container Recipes ", "                                      |  " -color Magenta, White, Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", "q to Quit ", "                                                 |  " -color Magenta, White, Magenta
-    Write-Color "╰────────────────────────────────────────────────────────────╯  " -color Magenta
-    Write-Host ""
-    Write-Host ""
-}
+if ($isMacOS -eq $true) {
+    #Optional define Menu with a Title
+    $Menu = [Menu]::New('WELCOME TO DPLOYY')
 
-function mac_menu
-{
-    Clear-Host
-    Write-Host ""
-    Write-Host ""
-    Write-Color "╭────────────────────────────────────────────────────────────╮  " -color Magenta
-    Write-Color "| ", "WELCOME TO DPLOYY", "                                          | " -color Magenta, Red, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────│" -color Magenta
-    Write-Color "| ", "SYSTEM SETUP AND TWEAKS: ", "                                  | " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────│" -color Magenta
-    Write-Color "|                                                            | " -color Magenta
-    Write-Color "| ", "1. Install Containerization ", "                               | " -color Magenta, White, Magenta
-    Write-Color "| ", "2. Install Homebrew ", "                                       | " -color Magenta, White, Magenta
-    Write-Color "| ", "3. Install MacPorts ", "                                       | " -color Magenta, White, Magenta
-    Write-Color "| ", "4. Install Apps (needs brew) ", "                              | " -color Magenta, White, Magenta
-    Write-Color "| ", "5. Install Nix ", "                                            | " -color Magenta, White, Magenta
-    Write-Color "|                                                            | " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────│ " -color Magenta
-    Write-Color "| ", "CONTAINERS", "                                                 | " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────│ " -color Magenta
-    Write-Color "|                                                            | " -color Magenta
-    Write-Color "| ", "6. Container Recipes ", "                                      | " -color Magenta, White, Magenta
-    Write-Color "|                                                            | " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────│ " -color Magenta
-    Write-Color "| ", "q to Quit ", "                                                 | " -color Magenta
-    Write-Color "╰────────────────────────────────────────────────────────────╯  " -color Magenta
-    Write-Host ""
-    Write-Host ""
+    #Define a Section
+    $Tweaks = [MenuSection]::New(1, 'SYSTEM SETUP AND TWEAKS')
+    #Add Options to the Section
+    $Tweaks.AddOption('1', 'Install container', '../Scripts/MacOS/ins_container.ps1')
+    $Tweaks.AddOption('2', 'Install Homebrew', '../Scripts/MacOS/ins_brew.ps1')
+    $Tweaks.AddOption('3', 'Install MacPorts', '../Scripts/MacOS/ins_macports.ps1')
+    $Tweaks.AddOption('4', 'Install Apps (Needs Homebrew)', '../Scripts/MacOS/ins_apps_mac.ps1')
+    $Tweaks.AddOption('5', 'Install Nix', '../Scripts/MacOS/ins_nix_macos.ps1')
+    $Tweaks.AddOption('S', 'Self Hosting', '../Scripts/MacOS/self_hosted.ps1')
+    $Tweaks.AddOption('Z', 'Add custom zshrc', '../Scripts/MacOS/zsh_prompt.ps1')
+    $Tweaks.AddOption('P', 'Add custom powershell config', '../Scripts/MacOS/ps_prompt.ps1')
+    #Add the Section to the Menu
+    $Menu.AddSection($Tweaks)
 
-}
+    #Same as above
+    $Containers = [MenuSection]::New(2, 'CONTAINERS')
+    $Containers.AddOption('6', 'Container Recipes', '../Scripts/MacOS/containers_mac.ps1')
+    $Containers.AddOption('Q', 'Quit', 'q')
+    $Menu.AddSection($Containers)
 
-#End of Functions list
-if ($isMacOS -eq $true)
-{
-    do {
-        mac_menu
-        $choice = Read-Host "Pick a number to continue or press 'q' to quit"
-
-        switch ($choice) {
-            1 {
-                pwsh -File ../Scripts/MacOS/ins_container.ps1
-            }
-            2 {
-                pwsh -File ../Scripts/MacOS/ins_brew.ps1
-            }
-            3 {
-                pwsh -File ../Scripts/MacOS/ins_macports.ps1
-            }
-            4 {
-                pwsh -File ../Scripts/MacOS/ins_apps_mac.ps1
-            }
-            5 {
-                pwsh -File ../Scripts/MacOS/nix_macos.ps1
-            }
-            6 {
-                pwsh -File ../Scripts/MacOS/containers_mac.ps1
-            }
-
-            default {
-                Write-Host "Pick a number to continue or press 'q' to quit"
-                continue
-            }
+    While ($True) {
+        Clear-Host
+        $Menu.Draw()
+        $Selection = $Menu.ReadResponse("Pick an option from the list above or press 'q' to exit", 'Callback')
+        If ($Selection -eq 'q') {
+            Break
+        }
+        Else {
+            "Executing Script: $($Selection)"
+            #Can even make them a module and have them run the code automatically in import
+            #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
         }
     }
-    until ($choice -eq 'q')
 }
 elseif ($isLinux -eq $true)
 {
-    do {
-        linux_menu
-        $choice = Read-Host "Pick a number to continue or press 'q' to quit"
+    #Optional define Menu with a Title
+    $Menu = [Menu]::New('WELCOME TO DPLOYY')
 
-        switch ($choice) {
-            1 {
-                pwsh -File ../Scripts/Linux/ins_flathub.ps1
-            }
-            2 {
-                pwsh -File ../Scripts/Linux/ins_pods.ps1
-            }
-            3 {
-                bash ../Scripts/Linux/ins_brew.sh
-            }
-            4 {
-                pwsh -File ../Scripts/Linux/ins_nix_pkg.ps1; Pause
-            }
-            5 {
-                pwsh -File ../Scripts/Linux/zsh_prompt.ps1
-            }
-            6 {
-                pwsh -File ../Scripts/Linux/ps_prompt.ps1
-            }
-            7 {
-                pwsh -File ../Scripts/Linux/containers_linux.ps1
-            }
+    #Define a Section
+    $Tweaks = [MenuSection]::New(1, 'SYSTEM SETUP AND TWEAKS')
+    #Add Options to the Section
+    $Tweaks.AddOption('1', 'Install Flathub', '../Scripts/Linux/ins_flathub.ps1')
+    $Tweaks.AddOption('2', 'Install Pods', '../Scripts/Linux/ins_pods.ps1')
+    $Tweaks.AddOption('3', 'Install Homebrew', '../Scripts/Linux/ins_flathub.ps1')
+    $Tweaks.AddOption('4', 'Install Nix', '../Scripts/Linux/ins_flathub.ps1')
+    $Tweaks.AddOption('Z', 'Custome Zsh Prompt', '../Scripts/Linux/zsh_prompt.ps1')
+    $Tweaks.AddOption('P', 'Custom Powershell Prompt', '../Scripts/Linux/ps_prompt.ps1')
+    $Tweaks.AddOption('S', 'Self Hosting', '../Scripts/Linux/self_hosted.ps1')
+    #Add the Section to the Menu
+    $Menu.AddSection($Tweaks)
 
-            default {
-                Write-Host "Pick a number to continue or press 'q' to quit"
-                continue
-            }
+    #Same as above
+    $Containers = [MenuSection]::New(2, 'CONTAINERS')
+    $Containers.AddOption('6', 'Container Recipes', '../Scripts/Linux/containers_linux.ps1')
+    $Containers.AddOption('Q', 'Quit', 'q')
+    $Menu.AddSection($Containers)
+
+    While ($True) {
+        Clear-Host
+        $Menu.Draw()
+        $Selection = $Menu.ReadResponse("Pick an option from the list above or press 'q' to quit", 'Callback')
+        If ($Selection -eq 'q') {
+            Break
+        }
+        Else {
+            "Executing Script: $($Selection)"
+            #Can even make them a module and have them run the code automatically in import
+            #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
         }
     }
-    until ($choice -eq 'q')
 } else
 {
-    do {
-        windows_menu
-        $choice = Read-Host "Pick a number to continue or press 'q' to quit or 'o' to view the options again"
+    #Optional define Menu with a Title
+    $Menu = [Menu]::New('WELCOME TO DPLOYY')
 
-        if ($choice -eq 'q' -or $choice -eq 'quit') {
-            exit
-        }
+    #Define a Section
+    $Tweaks = [MenuSection]::New(1, 'SYSTEM SETUP AND TWEAKS')
+    #Add Options to the Section
+    $Tweaks.AddOption('1', 'Install WSL', '..\Scripts\Windows\ins_wsl.ps1')
+    $Tweaks.AddOption('2', 'Install Apps', '..\Scripts\Windows\ins_apps.ps1')
+    $Tweaks.AddOption('3', 'Custom WSL Kernel', '..\Scripts\Windows\ins_wsl_kernel.ps1')
+    $Tweaks.AddOption('4', 'Custom Powershell config', '..\Scripts\Windows\ps_prompt.ps1')
+    $Tweaks.AddOption('5', 'Install Scoop', '..\Scripts\Windows\ins_scoop.ps1')
+    $Tweaks.AddOption('G', 'Install Scoop', '..\Scripts\Windows\ins_scoop.ps1')
+    $Tweaks.AddOption('H', 'Enable Hyper-V', '..\Scripts\Windows\hyperv-on.bat')
+    $Tweaks.AddOption('S', 'Self Hosting', '..\Scripts\Windows\self_hosted.ps1')
+     #Add the Section to the Menu
+    $Menu.AddSection($Tweaks)
 
-        switch ($choice) {
-            1 {
-                pwsh -File ..\Scripts\Windows\ins_wsl.ps1
-            }
-            2 {
-                pwsh -File ..\Scripts\Windows\ins_apps.ps1
-            }
-            3 {
-                pwsh -File ..\Scripts\Windows\ins_wsl_kernel.ps1
-            }
-            4 {
-                pwsh -File ..\Scripts\Windows\ps_prompt.ps1
-            }
-            5 {
-                pwsh -File ..\Scripts\Windows\ins_scoop.ps1
-            }
-            6 {
-                pwsh -File ..\Scripts\Windows\containers_windows.ps1
-            }
-            'u' {
-                pwsh -File ..\Scripts\Windows\update_apps.ps1
-            }
-            'g' {
-                pwsh -File ..\Scripts\Windows\god_mode.ps1
-            }
-            'h' {
-                cmd /c ..\Scripts\Windows\hyperv-on.bat
-            }
-            'c' {
-                Start-Process Powershell -Verb RunAs -ArgumentList "irm https://christitus.com/win | iex" -Wait
-            }
-            'w' {
-                pwsh -Command "& ([scriptblock]::Create((irm 'https://debloat.raphi.re/')))"
-            }
-            default {
-                Write-Host "Pick a number to continue or press 'q' to quit"
-                continue
-            }
+    $Containers = [MenuSection]::New(2, 'CONTAINERS')
+    $Containers.AddOption('6', 'Container Recipes', '..\Scripts\Windows\containers_windows.ps1')
+    $Menu.AddSection($Containers)
+
+    $Debloat = [MenuSection]::New(2, 'DEBLOAT TOOLS')
+    #Add Options to the Section
+    $Debloat.AddOption('C', 'Chris Titus Tool', '..\Scripts\Windows\titus.ps1')
+    $Debloat.AddOption('W', 'Windows11 Debloat Script', '..\Scripts\Windows\win11dbloat.ps1')
+    $Debloat.AddOption('Q', 'Quit', 'q')
+    $Menu.AddSection($Debloat)
+
+    While ($True) {
+        Clear-Host
+        $Menu.Draw()
+        $Selection = $Menu.ReadResponse("Pick an option from the list above or press 'q' to quit", 'Callback')
+        If ($Selection -eq 'q') {
+            Break
         }
-    } until ($choice -eq 'q')
+        Else {
+            "Executing Script: $($Selection)"
+            #Can even make them a module and have them run the code automatically in import
+            #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+        }
+    }
 }

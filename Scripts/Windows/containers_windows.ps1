@@ -1,43 +1,33 @@
-function containers_windows {
-    Clear-Host
-    Write-Host ""
-    Write-Host ""
-    Write-Color "╭────────────────────────────────────────────────────────────╮  " -color Magenta
-    Write-Color "| ", "WSL DISTRO INSTALLER ", "                                      | " -color Magenta, White, Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "| ", "Pick your WSL Distro: ", "                                     | " -color Magenta, White, Magenta
-    Write-Color "| ", "   1. Ubuntu", "                                               | " -color Magenta, White, Magenta
-    Write-Color "| ", "   2. Fedora", "                                               | " -color Magenta, White, Magenta
-    Write-Color "| ", "   3. Kali Linux", "                                           | " -color Magenta, White, Magenta
-    Write-Color "| ", "   4. Arch Linux", "                                           | " -color Magenta, White, Magenta
-    Write-Color "| ", "   5. OpenSUSE Leap", "                                        | " -color Magenta, White, Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "|                                                            |  " -color Magenta
-    Write-Color "|────────────────────────────────────────────────────────────|  " -color Magenta
-    Write-Color "| ", " q to Quit ", "                                                |  " -color Magenta, White, Magenta
-    Write-Color "╰────────────────────────────────────────────────────────────╯  " -color Magenta
-    Write-Host ""
-    Write-Host ""
+if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
+     if ( ($IsMacOS -eq $true) -or ($IsLinux -eq $true) ) {
+          Import-Module ../../bin/DynamicMenu.psm1
+     }
+     else {
+          import-module ..\..\bin\DynamicMenu.psm1
+     }
 }
 
-do {
-    $choice = Read-Host "Enter your choice or press 'q' to quit"
-    switch ($choice) {
-        '1' {
-             pwsh -File container_ubuntu.ps1
-        }
-        '2' {
-             pwsh -File container_fedora.ps1
-        }
-        '3' {
-             pwsh -File container_kali.ps1
-        }
-        '4' {
-             pwsh -File container_arch.ps1
-        }
-        '5' {
-             pwsh -File container_leap.ps1
-        }
-    }
-} until ($choice -eq 'q')
+$Menu = [Menu]::New('CONTAINER RECIPES')
+
+$Container = [MenuSection]::New(1, 'AVAILABLE APPLICATIONS')
+$Container.AddOption('1', 'Ubuntu', '.\container_ubuntu.ps1')
+$Container.AddOption('2', 'Fedora', '.\container_fedora.ps1')
+$Container.AddOption('3', 'Kali Linux', '.\container_kali.ps1')
+$Container.AddOption('4', 'Arch Linux', '.\container_arch.ps1')
+$Container.AddOption('5', 'OpenSUSE Leap', '.\container_leap.ps1')
+$Container.AddOption('Q', 'Quit', 'q')
+$Menu.AddSection($Container)
+
+While ($True) {
+     Clear-Host
+     $Menu.Draw()
+     $Selection = $Menu.ReadResponse("Pick an option from the list above or press 'q' to quit", 'Callback')
+     If ($Selection -eq 'q') {
+          Break
+     }
+     Else {
+          "Executing Script: $($Selection)"
+          #Can even make them a module and have them run the code automatically in import
+          #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+     }
+}
