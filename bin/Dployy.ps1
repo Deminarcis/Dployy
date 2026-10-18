@@ -95,7 +95,7 @@ elseif ($isLinux -eq $true)
     $Tweaks.AddOption('3', 'Custom WSL Kernel', '..\Scripts\Windows\ins_wsl_kernel.ps1')
     $Tweaks.AddOption('4', 'Custom Powershell config', '..\Scripts\Windows\ps_prompt.ps1')
     $Tweaks.AddOption('5', 'Install Scoop', '..\Scripts\Windows\ins_scoop.ps1')
-    $Tweaks.AddOption('G', 'Install Scoop', '..\Scripts\Windows\ins_scoop.ps1')
+    $Tweaks.AddOption('G', 'God Mode', '..\Scripts\Windows\god_mode.ps1')
     $Tweaks.AddOption('H', 'Enable Hyper-V', '..\Scripts\Windows\hyperv-on.bat')
     $Tweaks.AddOption('S', 'Self Hosting', '..\Scripts\Windows\self_hosted.ps1')
      #Add the Section to the Menu
