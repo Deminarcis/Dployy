@@ -1,3 +1,10 @@
 commandant-2.0.ps1
 bin/.DS_Store
 .DS_Store
+Resources/container/container example
+Resources/container/launch_at_start
+Resources/container/plist example
+Resources/wslc/wslc example.ps1
+Resources/wslc/wslc on startup.ps1
+Resources/wslc
+Resources/container
