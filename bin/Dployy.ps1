@@ -3,7 +3,7 @@ if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
         Import-Module ./DynamicMenu.psm1
     }
     else {
-        import-module .\DynamicMenu.psm1
+        Import-Module .\DynamicMenu.psm1
     }
 }
 
@@ -41,7 +41,7 @@ if ($isMacOS -eq $true) {
         Else {
             "Executing Script: $($Selection)"
             #Can even make them a module and have them run the code automatically in import
-            #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+            Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
         }
     }
 }
@@ -79,7 +79,7 @@ elseif ($isLinux -eq $true)
         Else {
             "Executing Script: $($Selection)"
             #Can even make them a module and have them run the code automatically in import
-            #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+            Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
         }
     }
 } else
@@ -122,7 +122,7 @@ elseif ($isLinux -eq $true)
         Else {
             "Executing Script: $($Selection)"
             #Can even make them a module and have them run the code automatically in import
-            #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+            Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
         }
     }
 }

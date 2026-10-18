@@ -6,7 +6,5 @@ function update_installed {
     Write-Host "[+] Updating installed Winget Apps..."
     winget upgrade --all
     Write-Output "[+] Done!"
-    Start-Sleep 10
-    show_tui
 }
 update_installed

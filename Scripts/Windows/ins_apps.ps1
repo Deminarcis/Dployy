@@ -47,6 +47,6 @@ While ($True) {
     Else {
         "Executing Script: $($Selection)"
         #Can even make them a module and have them run the code automatically in import
-        #Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
+        Remove-Module $Selection -ErrorAction SilentlyContinue; Import-Module ".\$($Selection)"
     }
 }
