@@ -8,7 +8,7 @@ if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
 }
 
 #Optional define Menu with a Title
-$Menu = [Menu]::New('SELF HOSTING')q
+$Menu = [Menu]::New('SELF HOSTING')
 
 #Define a Section
 $Services = [MenuSection]::New(1, 'SERVICES')
@@ -29,7 +29,6 @@ $VPNs.AddOption('NBSH', 'Netbird (self hosted)', 'Netbird_SelfHosted.ps1')
 $VPNs.AddOption('NB', 'Netbird', 'Netbird.ps1')
 $VPNs.AddOption('TS', 'Tailscale', 'Tailscale.ps1')
 $Menu.AddSection($VPNs)
-
 
 $Management = [MenuSection]::New(2, 'Management Interfaces')
 $Management.AddOption('C', 'Cockpit', 'Cockpit.ps1')

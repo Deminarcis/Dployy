@@ -8,7 +8,7 @@ if (-not (Get-Module -ListAvailable -Name "DynamicMenu")) {
 }
 
 #Optional define Menu with a Title
-$Menu = [Menu]::New('SELF HOSTING')q
+$Menu = [Menu]::New('SELF HOSTING')
 
 #Define a Section
 $Services = [MenuSection]::New(1, 'SERVICES')
