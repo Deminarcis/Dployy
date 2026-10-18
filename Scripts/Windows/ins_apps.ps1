@@ -34,6 +34,7 @@ $Apps.AddOption('21', 'Obsidian', 'scoop install extras/obsidian')
 $Apps.AddOption('22', 'Mesa 3D', 'scoop install games/mesa3d')
 $Apps.AddOption('23', 'YT-Dlp', 'scoop install yt-dlp ffmpeg')
 $Apps.AddOption('24', 'handbrake', 'scoop install extras/handbrake')
+$Apps.AddOption('B', 'Go Back', '..\bin\Dployy.ps1')
 $Apps.AddOption('Q', 'Quit', 'q')
 $Menu.AddSection($Apps)
 

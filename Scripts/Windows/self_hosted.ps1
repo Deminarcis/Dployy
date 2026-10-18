@@ -32,6 +32,7 @@ $Menu.AddSection($VPNs)
 
 $Management = [MenuSection]::New(2, 'Management Interfaces')
 $Management.AddOption('C', 'Cockpit', 'Cockpit.ps1')
+$Management.AddOption('B', 'Go Back', '..\bin\Dployy.ps1')
 $Management.AddOption('Q', 'Quit', 'q')
 $Menu.AddSection($Management)
 

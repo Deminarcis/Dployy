@@ -38,6 +38,7 @@ $Apps.AddOption('25', 'Fresh Editor', 'brew install fresh')
 $Apps.AddOption('26', 'lsd', 'brew install lsd')
 $Apps.AddOption('27', 'Vulkan Tools', 'brew install vulkan-tools')
 $Apps.AddOption('28', 'Mesa 3D', 'brew install mesa')
+$Apps.AddOption('B', 'Go Back', '../bin/Dployy.ps1')
 $Apps.AddOption('Q', 'Quit', 'q')
 $Menu.AddSection($Apps)
 
